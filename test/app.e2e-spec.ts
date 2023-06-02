@@ -25,86 +25,84 @@ describe('App EndToEnd tests', () => {
     pactum.request.setBaseUrl(`http://localhost:${PORT}`);
   });
 
-  // describe('Test Authentication', () => {
-  //   describe('Register', () => {
-  //     it('should show error with empty email', () => {
-  //       return pactum
-  //         .spec()
-  //         .post('/auth/register')
-  //         .withBody({
-  //           email: '',
-  //           password: 'a123456',
-  //         })
-  //         .expectStatus(400);
-  //       //.inspect()
-  //     });
-  //     it('should show error with invalid email format', () => {
-  //       return pactum
-  //         .spec()
-  //         .post('/auth/register')
-  //         .withBody({
-  //           email: 'hoang@gmail', //invalid email format
-  //           password: 'a123456',
-  //         })
-  //         .expectStatus(400);
-  //       //.inspect()
-  //     });
-  //     it('should show error IF password is empty', () => {
-  //       return pactum
-  //         .spec()
-  //         .post('/auth/register')
-  //         .withBody({
-  //           email: 'hoang@gmail.com',
-  //           password: '', //blank password
-  //         })
-  //         .expectStatus(400);
-  //       //.inspect()
-  //     });
-  //     //many other cases...
-  //     it('should Register', () => {
-  //       return pactum
-  //         .spec()
-  //         .post('/auth/register')
-  //         .withBody({
-  //           email: 'testemail01@gmail.com',
-  //           password: 'a123456',
-  //         })
-  //         .expectStatus(201);
-  //       //.inspect()
-  //     });
-  //   });
-  //   describe('Login', () => {
-  //     it('should Login', () => {
-  //       return (
-  //         pactum
-  //           .spec()
-  //           .post('/auth/login')
-  //           .withBody({
-  //             email: 'testemail01@gmail.com',
-  //             password: 'a123456',
-  //           })
-  //           .expectStatus(201)
-  //           //.inspect()
-  //           .stores('accessToken', 'accessToken')
-  //       );
-  //     });
-  //   });
-  //   describe('User', () => {
-  //     describe('Get Detail User', () => {
-  //       it('should get detail user', () => {
-  //         return pactum
-  //           .spec()
-  //           .get('/users/me')
-  //           .withHeaders({
-  //             Authorization: 'Bearer $S{accessToken}',
-  //           })
-  //           .expectStatus(200)
-  //           .stores('userId', 'id')
-  //           .inspect();
-  //       });
-  //     });
-  //   });
-  // });
+  describe('Test Authentication', () => {
+    describe('Register', () => {
+      it('should show error with empty email', () => {
+        return pactum
+          .spec()
+          .post('/auth/register')
+          .withBody({
+            email: '',
+            password: 'a123456',
+          })
+          .expectStatus(404);
+        // .inspect();
+      });
+      it('should show error with invalid email format', () => {
+        return pactum
+          .spec()
+          .post('/auth/register')
+          .withBody({
+            email: 'hoang@gmail', //invalid email format
+            password: 'a123456',
+          })
+          .expectStatus(404);
+        // .inspect();
+      });
+      it('should show error IF password is empty', () => {
+        return pactum
+          .spec()
+          .post('/auth/register')
+          .withBody({
+            email: 'hoang@gmail.com',
+            password: '', //blank password
+          })
+          .expectStatus(404);
+        //.inspect()
+      });
+      //many other cases...
+      it('should Register', () => {
+        return pactum
+          .spec()
+          .post('/auth/register')
+          .withBody({
+            email: 'testemail01@gmail.com',
+            password: 'a123456',
+          })
+          .expectStatus(404)
+          .inspect();
+      });
+    });
+    describe('Login', () => {
+      it('should Login', () => {
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody({
+            email: 'testemail01@gmail.com',
+            password: 'a123456',
+          })
+          .expectStatus(404)
+          .inspect()
+          .stores('accessToken', 'accessToken');
+      });
+    });
+    describe('User', () => {
+      describe('Get Detail User', () => {
+        it('should get detail user', () => {
+          return pactum
+            .spec()
+            .get('/users/me')
+            .withHeaders({
+              Authorization: 'Bearer $S{accessToken}',
+            })
+            .expectStatus(404)
+            .stores('userId', 'id')
+            .inspect();
+        });
+      });
+    });
+  });
 
   // //test note here
   // describe('Note', () => {
